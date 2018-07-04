@@ -1,10 +1,10 @@
 from django.conf.urls import include, url
 from django.http import HttpResponse
-from views import getsquare,getnum,post
+from views import getsquare,postdata,post
 
 
 urlpatterns =[
     url(r'^getsqr/(?P<_num>\d+)', getsquare),
-    url(r'^post/(?P<_values>[0-99,-]+)',post),
-    url(r'^numsqr/(?P<_num>\d+)',getnum)
+    url(r'^add/', postdata),
+    url(r'^post/(?P<_Number>\d+)',post)
 ]

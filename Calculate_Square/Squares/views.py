@@ -8,29 +8,8 @@ from .models import square
 from django.http import JsonResponse
 from django.http import HttpResponse, HttpResponseNotFound
 from .serializers import squareSerializer
-import MySQLdb
 
-HOST = 'localhost'
-USER = 'ganesh'
-PASSWORD = 'ganesh55'
-DATABASE = 'sqr'
 
-# Create your views here.
-@api_view(['GET'])
-def getnum(request, _num):
-    _mar = square.objects.filter(number = _num)
-    if _mar:
-        serializer = squareSerializer(_mar, many = True)
-        return Response(serializer.data)
-    else:
-        _sq = int(_num) * int(_num)
-        db=MySQLdb.connect(host = HOST, user = USER, passwd = PASSWORD, db = DATABASE)
-        cursor = db.cursor()
-        cursor.execute('INSERT INTO Squares_square (number, sqr) values(%s, %s)',(float(_num),float(_sq)))
-        db.commit()
-        cursor.close()
-        print (_sq)
-        return Response({'Message': "New number and it's square inserted", 'Number': _num, 'Square': _sq})
 
 @api_view(['GET'])
 def getsquare(request,_num):
@@ -42,23 +21,46 @@ def getsquare(request,_num):
     else:
         return Response({"Message": 'NUMBER NOT FOUND'})
 
-@api_view(['GET'])
-def post(request, _values):
-    _num, _sq = _values.split('-')
-    _mar = square.objects.filter(number = _num)
-    if _mar:
-        db=MySQLdb.connect(host = HOST, user = USER, passwd = PASSWORD, db = DATABASE)
-        cursor = db.cursor()
-        cursor.execute('UPDATE Squares_square SET sqr = %s WHERE number = %s',(float(_sq),float(_num)))
-        db.commit()
-        cursor.close()
-        print (_sq)
-        return Response({'Message': 'Square of the given number is updated', 'Number': _num, 'Square': _sq})
-    else:
-        db=MySQLdb.connect(host = HOST, user = USER, passwd = PASSWORD, db = DATABASE)
-        cursor = db.cursor()
-        cursor.execute('INSERT INTO Squares_square (number, sqr) values(%s, %s)',(float(_num),float(_sq)))
-        db.commit()
-        cursor.close()
-        print (_sq)
-        return Response({'Message': 'New number and square inserted', 'Number': _num, 'Square': _sq})
+
+@api_view(['POST'])
+def postdata(request):
+    number = request.POST.get("number",none)
+    sqr = request.POST.get("sqr",none)
+    squ=square.objects.create(number=number,sqr=sqr)
+    return Response({'message': 'numsqr {:d} created'.format(squ.id)}, status=301)
+
+
+
+
+@api_view(['GET', 'POST', 'PUT','DELETE'])
+def post (request,_Number):
+
+    if request.method == 'GET':
+        mul = square.objects.filter(number=_Number)
+        serializer = squareSerializer(mul, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        serializer = squareSerializer(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+
+            return Response(serializer.data, status= 301)
+
+    elif request.method == 'PUT':
+        print (request.data)
+        mul = square.objects.filter(number=request.data["number"])
+        print (mul)
+        mul.update(sqr=request.data["sqr"])
+        serializer = squareSerializer(data=mul, many=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status= 301)
+    elif request.method == 'DELETE':
+        mul = square.objects.filter(number=_Number)
+        mul.delete()
+        serializer = squareSerializer(data=mul, many=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status= 301)
