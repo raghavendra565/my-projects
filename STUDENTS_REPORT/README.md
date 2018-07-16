@@ -76,7 +76,8 @@
 
 
 ### 14) Creating super user
- * $ python manage.py createsuper
+ * $ python manage.py createsuperuser
+ 
   (give name password and mail)
 
 ### 15) running the server
