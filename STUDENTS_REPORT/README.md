@@ -54,6 +54,7 @@
  * $ show databses;
  * $ use database;
  * $ show tables;
+ 
  (you can see your tables there)
 
 ### 12) Sending data to our tables
@@ -70,6 +71,7 @@
  * $ use database;
  * $ show tables; 
  * $ select *from (tablename)
+  
   (you can see the data in mysql tables)
 
 
