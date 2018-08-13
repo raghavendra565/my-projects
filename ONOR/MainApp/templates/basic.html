@@ -1,0 +1,7 @@
+{% for x in s %}
+  <h1>{{ x.id }}</h1>
+  <h1>{{ x.name }}</h1>
+  {% if x.image %}
+  <img width=400px src={{x.image.url}} />
+  {% endif %}
+{% endfor %}
