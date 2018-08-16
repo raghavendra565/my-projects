@@ -60,7 +60,7 @@ class Carousel(models.Model):
     created  = models.DateTimeField(auto_now = True)
     updated  = models.DateTimeField(auto_now = True)
     def __str__(self):
-        return "%d %s" % (self.id,self.user)
+        return "%d %s" % (self.id,self.user.name)
 
 
 class Categories(models.Model):

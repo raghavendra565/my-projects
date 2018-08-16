@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+
+
+<h1 style="color:blue;font-family:verdana;text-align:center;"> EasyShop App</h1>
+{% if act %}
+<table>
+  <h2 style="color:green;font-family:verdana;text-align:center;"> Orders of all users</h2>
+  <tr>
+    <th>User</th>
+    <th>Item</th>
+    <th>Categorie</th>
+    <th>Status</th>
+    <th>TotalPrice</th>
+    <th>Created</th>
+    <th>Updated</th>
+  </tr>
+
+    {% for x in act%}
+  <tr>
+    <td>{{x.first_name}}</td>
+    <td>{{x.last_name}}</td>
+    <td>{{x.mobile}}</td>
+    <td>{{x.email}}</td>
+    <td>{{x.address}}</td>
+    <td>{{x.role.name}}</td>
+    <td>{{x.status}}</td>
+  </tr>
+    {% endfor %}
+</table>
+{% endif %}
+
+
+</body>
+</html>

@@ -15,9 +15,12 @@ from MainApp.controllers.listing_images import getupdatedeletelisting_images
 from MainApp.controllers.categoriecarousels import getupdatedeletecategoriecarousels
 from MainApp.controllers.roles import getupdateroles
 from MainApp.controllers.mainpagecarousel import getupdatedeletemainpagecarousels
+from MainApp.views import users,send
 
 
 urlpatterns=[
+        url(r'^users',users),
+        url(r'^send',send),
         url(r'^createcategories',createcategories.as_view()),
         url(r'^createcategoriecarousels',createcategoriecarousels.as_view()),
         url(r'^createusers',createusers.as_view()),
