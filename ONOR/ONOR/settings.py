@@ -132,15 +132,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, '../static/')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, '../media/')
-"""
-AWS_ACCESS_KEY_ID = 'AKIAJ4P3ETSWDSI44K2A'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'listing'
-AWS_S3_ENDPOINT_URL = 'https://052734766696.signin.aws.amazon.com/console'
-AWS_S3_OBJECT_PARAMETERS = {
-    'CacheControl': 'max-age=86400',
-}
-#AWS_LOCATION = 'listing'
+
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'ONOR/static'),
@@ -151,10 +143,10 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'ONOR/static'),
 ]
 
-AWS_STORAGE_BUCKET_NAME = 'listing'
-#AWS_S3_REGION_NAME = 'Asia Pacific(Mumbai)'
-AWS_ACCESS_KEY_ID = 'AKIAJ4P3ETSWDSI44K2A'
-AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = ''
+#AWS_S3_REGION_NAME = ''
+AWS_ACCESS_KEY_ID = ''
+AWS_SECRET_ACCESS_KEY = ''
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
 }
